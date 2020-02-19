@@ -7,6 +7,8 @@ import Footer from './components/Footer/Footer';
 
 import Home from './pages/Home/Home';
 import Films from './pages/Films/Films';
+import Login from './pages/Login/Login';
+import Signup from './pages/Signup/Signup';
 
 function App() {
   return (
@@ -19,6 +21,12 @@ function App() {
           }/>
           <Route exact path="/films" render={props =>
           <Films />
+        }/>
+          <Route exact path="/login" render={props =>
+          <Login />
+        }/>
+          <Route exact path="/signup" render={props =>
+          <Signup />
         }/>
         </Switch>
       </div>
