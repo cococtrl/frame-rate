@@ -24,3 +24,8 @@
 .navbar ul li:hover {
     border-bottom: 2px solid beige;
 }
+
+.navbar a {
+    text-decoration: none;
+    color: peru;
+}
