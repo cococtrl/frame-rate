@@ -1,16 +1,14 @@
 import React, { Component } from 'react';
-import styles from './SignupForm.module.css';
+import styles from './LoginForm.module.css';
 
-class SignupForm extends Component {
+class LoginForm extends Component {
 
     state = this.getInitialState();
 
     getInitialState() {
         return {
-            name: '',
             email: '',
-            password: '',
-            passwordConfirm: ''
+            password: ''
         }
     }
 
@@ -29,15 +27,7 @@ class SignupForm extends Component {
         return (
             <form onSubmit={this.handleSubmit} className={styles.form}>
                 <fieldset>
-                    <legend>Signup Form</legend>
-                    <label htmlFor="name">Full Name</label>
-                    <input 
-                        id="name" 
-                        name="name" 
-                        type="text" 
-                        value={this.state.name}
-                        onChange={this.handleChange}
-                    />
+                    <legend>Login Form</legend>
 
                     <label htmlFor="email">Email</label>
                     <input 
@@ -47,22 +37,12 @@ class SignupForm extends Component {
                         value={this.state.email}
                         onChange={this.handleChange}
                     />
-
                     <label htmlFor="password">Password</label>
                     <input 
                         id="password" 
                         name="password" 
                         type="password" 
                         value={this.state.password}
-                        onChange={this.handleChange}
-                    />
-
-                    <label htmlFor="passwordConfirm">Confirm Password</label>
-                    <input 
-                        id="passwordConfirm" 
-                        name="passwordConfirmation" 
-                        type="password" 
-                        value={this.state.passwordConfirm}
                         onChange={this.handleChange}
                     />
                     <button type="submit">Submit</button>
@@ -72,4 +52,4 @@ class SignupForm extends Component {
     }
 }
 
-export default SignupForm;
+export default LoginForm;
