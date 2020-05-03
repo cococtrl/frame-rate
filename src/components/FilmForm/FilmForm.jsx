@@ -1,24 +1,25 @@
 import React, { Component } from 'react';
-import styles from './LoginForm.module.css';
+import styles from './FilmForm.module.css';
 
 import userService from '../../utils/userService';
+import filmService from '../../utils/filmService';
 
-class LoginForm extends Component {
+class FilmForm extends Component {
 
     state = this.getInitialState();
 
     getInitialState() {
         return {
-            email: '',
-            password: '',
+            title: '',
+            director: '',
             error: ''
         };
     }
 
     isFormValid = () => {
         return (
-            this.state.email && 
-            this.state.password
+            this.state.title && 
+            this.state.director
         )
     }
 
@@ -33,16 +34,17 @@ class LoginForm extends Component {
         e.preventDefault();
         if(!this.isFormValid()) return;
         try {
-            const { email, password } = this.state;
-            await userService.login({ email, password });
+            const { title, director } = this.state;
+            const addedBy = userService.getUser()._id
+            await userService.create({ title, director, addedBy });
             this.setState(this.getInitialState(), () => {
-                this.props.handleSignupOrLogin();
-                this.props.history.push('/films');
+                this.props.hangleGetFilms();
+                this.props.historn.push('/films')
             });
         } catch (error) {
             this.setState({
-                email: '',
-                password: '',
+                title: '',
+                director: '',
                 error: error.message 
             });
         }
@@ -56,25 +58,25 @@ class LoginForm extends Component {
                 }
             <form onSubmit={this.handleSubmit}>
                 <fieldset>
-                    <legend>Login Form</legend>
+                    <legend>New Film Form</legend>
 
-                    <label htmlFor="email">Email</label>
+                    <label htmlFor="title">Title</label>
                     <input 
-                        id="email" 
-                        name="email" 
-                        type="email" 
-                        value={this.state.email}
+                        id="title" 
+                        name="title" 
+                        type="title" 
+                        value={this.state.title}
                         onChange={this.handleChange}
                     />
-                    <label htmlFor="password">Password</label>
+                    <label htmlFor="directot">Director</label>
                     <input 
-                        id="password" 
-                        name="password" 
-                        type="password" 
-                        value={this.state.password}
+                        id="director" 
+                        name="director" 
+                        type="director" 
+                        value={this.state.director}
                         onChange={this.handleChange}
                     />
-                    <button disabled={!this.isFormValid()} type="submit">Submit</button>
+                    <button disabled={!this.isFormValid()} type="submit">Add Film</button>
                 </fieldset>
             </form>
         </section>
@@ -82,4 +84,4 @@ class LoginForm extends Component {
     }
 }
 
-export default LoginForm;
+export default FilmForm;

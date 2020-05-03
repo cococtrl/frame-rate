@@ -11,11 +11,13 @@ import Home from './pages/Home/Home';
 import Films from './pages/Films/Films';
 import Login from './pages/Login/Login';
 import Signup from './pages/Signup/Signup';
+import filmService from './utils/filmService';
 
 class App extends Component {
 
   state = {
-    user: userService.getUser()
+    user: userService.getUser(),
+    films: []
   }
 
   handleSignupOrLogin = () => {
@@ -26,6 +28,17 @@ class App extends Component {
     userService.Logout();
     this.setState({ user: null });
   }
+
+  handleGetFilms = async () => {
+    if(userService.getUser()) {
+      const {films} = await filmService.index();
+      this.setState({ films });
+    }
+  }
+  
+  async componentDidMount() {
+    this.handleGetFilms();
+    }
 
   render() {
     return (
@@ -38,11 +51,19 @@ class App extends Component {
             }/>
             <Route exact path="/films" render={props =>
             userService.getUser()
-            ? <Films />
+            ? <Films 
+            {...props}
+            handleGetFilms={this.handleGetFilms}
+            films={this.state.films}
+            />
             : <Redirect to="/login" />
           }/>
             <Route exact path="/login" render={props =>
-            <Login />
+            <Login 
+            {...props}
+            handleSignupOrLogin={this.handleSignupOrLogin}
+            films={this.state.films}
+            />
           }/>
             <Route exact path="/signup" render={props =>
             <Signup 

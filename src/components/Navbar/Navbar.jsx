@@ -9,7 +9,7 @@ const Navbar = (props) => {
     const conditionalUI = userService.getUser()
     ? <Fragment>
         <li>
-            <Link to="/films">Films</Link>
+            <Link to="/films">All Films</Link>
         </li>
          <li>
             <Link to="" onClick={props.handleLogout}>Logout</Link>
@@ -17,6 +17,9 @@ const Navbar = (props) => {
         </Fragment>
     :
         <Fragment>
+        <li>
+            <Link to="/films">Films</Link>
+        </li>
          <li>
             <Link to="/login">Login</Link>
          </li>
