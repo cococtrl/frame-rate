@@ -3,8 +3,8 @@
     align-items: center;
     height: 5rem;
     justify-content: space-around;
-    color: peru;
-    background-color: bisque;
+    color: #A59E8C;
+    background-color: #4C5760;
 }
 
 .navbar h1 {
@@ -27,5 +27,5 @@
 
 .navbar a {
     text-decoration: none;
-    color: peru;
+    color: #A59E8C;
 }

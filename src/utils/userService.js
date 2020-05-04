@@ -1,15 +1,15 @@
 import tokenService from "./tokenService";
 
-const BASE_URL = '/api/users';
+const BASE_URL = '/api/users/'
 
 function login(creds) {
-    return fetch(BASE_URL + '/login', {
+    return fetch(BASE_URL + 'login', {
         method: 'POST',
         headers: new Headers({'Content-type' : 'Application/json'}),
         body: JSON.stringify(creds)
     })
     .then(response => {
-        if(response.ok) {
+        if(response.ok){
             return response.json();
         } else {
             throw new Error('Bad Credentials');
@@ -27,19 +27,20 @@ function getUser() {
 }
 
 function signup(user) {
-    return fetch(BASE_URL + '/signup', {
+    return fetch(BASE_URL + 'signup', {
         method: 'POST',
         headers: new Headers({'Content-type': 'Application/json'}),
         body: JSON.stringify(user)
     })
     .then(response => {
+        console.log(response)
         if(response.ok) {
-            return response.json();
+            return response.json()
         } else {
             throw new Error('Email already in use')
         }
     })
-    .then( ({token}) => tokenService.setToken(token))
+    .then(({token}) => tokenService.setToken(token))
 }
 
 export default {
@@ -47,4 +48,4 @@ export default {
     getUser,
     logout,
     login
-}
+};

@@ -7,9 +7,8 @@ module.exports = {
 
 async function index(req,res) {
     try {
-        const films = await Film.find({})
-        .sort('-createdAt').populate('addedBy');
-        res.json({ films });
+        const events = await Event.find({}).sort('-createdAt').populate('addedBy');
+        res.json({ events });
     } catch (error) {
         res.status(401).json({err: 'unauthorized'});
     }

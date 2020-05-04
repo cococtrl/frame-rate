@@ -35,7 +35,7 @@ class SignupForm extends Component {
     handleSubmit = async e => {
         e.preventDefault();
         if(!this.isFormValid()) return;
-
+        alert('form submitted');
         try {
             const { name, email, password} = this.state
             await userService.signup({ name, email, password });
@@ -62,7 +62,7 @@ class SignupForm extends Component {
             }
             <form onSubmit={this.handleSubmit}>
                 <fieldset>
-                    <legend>Signup Form</legend>
+                    <legend>Signup</legend>
                     <label htmlFor="name">Full Name</label>
                     <input 
                         id="name" 
@@ -98,7 +98,7 @@ class SignupForm extends Component {
                         value={this.state.passwordConfirm}
                         onChange={this.handleChange}
                     />
-                    <button disabled={!this.isFormValid} type="submit">Submit</button>
+                    <button disabled={!this.isFormValid()} type="submit">Submit</button>
                 </fieldset>
             </form>
         </section>  

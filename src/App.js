@@ -3,6 +3,7 @@ import {Switch, Route, Redirect} from 'react-router-dom';
 
 import './App.css';
 import userService from './utils/userService';
+import filmService from './utils/filmService';
 
 import Navbar from './components/Navbar/Navbar';
 import Footer from './components/Footer/Footer';
@@ -11,7 +12,6 @@ import Home from './pages/Home/Home';
 import Films from './pages/Films/Films';
 import Login from './pages/Login/Login';
 import Signup from './pages/Signup/Signup';
-import filmService from './utils/filmService';
 
 class App extends Component {
 
@@ -21,12 +21,14 @@ class App extends Component {
   }
 
   handleSignupOrLogin = () => {
-    this.setState({ user: userService.getUser() })
+    this.setState({ user: userService.getUser() }, () => {
+      this.handleGetFilms();
+    })
   }
 
   handleLogout = () => {
     userService.Logout();
-    this.setState({ user: null });
+    this.setState({ user: null, events: [] });
   }
 
   handleGetFilms = async () => {
@@ -51,8 +53,7 @@ class App extends Component {
             }/>
             <Route exact path="/films" render={props =>
             userService.getUser()
-            ? <Films 
-            {...props}
+            ? <Films {...props}
             handleGetFilms={this.handleGetFilms}
             films={this.state.films}
             />
@@ -62,7 +63,6 @@ class App extends Component {
             <Login 
             {...props}
             handleSignupOrLogin={this.handleSignupOrLogin}
-            films={this.state.films}
             />
           }/>
             <Route exact path="/signup" render={props =>

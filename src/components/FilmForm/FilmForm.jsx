@@ -68,7 +68,7 @@ class FilmForm extends Component {
                         value={this.state.title}
                         onChange={this.handleChange}
                     />
-                    <label htmlFor="directot">Director</label>
+                    <label htmlFor="director">Director</label>
                     <input 
                         id="director" 
                         name="director" 
